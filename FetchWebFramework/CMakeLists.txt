@@ -1,12 +1,12 @@
 cmake_minimum_required(VERSION 3.27.0)
 
-project(FetchWebFramework)
-
-include(FetchContent)
-
 set(WEB_FRAMEWORK_VERSION 3.3.1)
 set(WEB_FRAMEWORK_URL https://github.com/LazyPanda07/WebFramework/releases/download/v${WEB_FRAMEWORK_VERSION})
 set(FETCHCONTENT_QUIET OFF CACHE BOOL "")
+
+project(FetchWebFramework)
+
+include(FetchContent)
 
 if (UNIX)
     set(WEB_FRAMEWORK_URL ${WEB_FRAMEWORK_URL}/Linux-WITH_PYTHON_EXECUTORS.OFF-BUILD_PYTHON_API.OFF--WITH_DOTNET_EXECUTORS.OFF-BUILD_CSHARP_API.OFF-BUILD_CC_API.OFF.zip)
@@ -21,6 +21,6 @@ FetchContent_Declare(
 
 FetchContent_MakeAvailable(WebFramework)
 
-set(WEB_FRAMEWORK_SDK ${webframework_SOURCE_DIR})
+list(APPEND CMAKE_PREFIX_PATH ${webframework_SOURCE_DIR})
 
-list(APPEND CMAKE_PREFIX_PATH ${WEB_FRAMEWORK_SDK})
+set(CMAKE_PREFIX_PATH ${CMAKE_PREFIX_PATH} PARENT_SCOPE)

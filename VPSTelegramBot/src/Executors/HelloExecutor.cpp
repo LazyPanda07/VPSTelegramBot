@@ -1,14 +1,16 @@
 #include "Executors/HelloExecutor.h"
 
+#include <iostream>
+
 namespace executor
 {
-	void HelloExecutor::doGet(framework::HttpRequest& request, framework::HttpResponse& response)
+	void HelloExecutor::doPost(framework::HttpRequest& request, framework::HttpResponse& response)
 	{
-		framework::JsonBuilder builder;
+		framework::JsonParser data = request.getJson();
 
-		builder["message"] = "Hello, World!";
+		std::cout << data << std::endl;
 
-		response.setBody(builder);
+		response.setBody("Hello");
 	}
 
 	DEFINE_EXECUTOR(HelloExecutor);

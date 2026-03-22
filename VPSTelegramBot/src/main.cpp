@@ -6,7 +6,8 @@ int main(int argc, char** argv) try
 {
 	framework::utility::initializeWebFramework();
 
-	framework::WebFramework server("config.json");
+	framework::utility::Config config("config.json");
+	framework::WebFramework server(config);
 
 	server.start(true, []() { std::cout << "Server is running..." << std::endl; });
 

@@ -47,12 +47,12 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <OutDir>$(SolutionDir)bin\$(Configuration)-$(Platform)\$(ProjectName)\</OutDir>
     <IntDir>$(SolutionDir)bin\int\$(Configuration)-$(Platform)\$(ProjectName)\</IntDir>
-    <PublicIncludeDirectories>$(SolutionDir)build\_deps\webframework-src\api\cxx\include\;$(PublicIncludeDirectories)</PublicIncludeDirectories>
+    <PublicIncludeDirectories>$(ProjectDir)build\_deps\webframework-src\api\cxx\include\;$(PublicIncludeDirectories)</PublicIncludeDirectories>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <OutDir>$(SolutionDir)bin\$(Configuration)-$(Platform)\$(ProjectName)\</OutDir>
     <IntDir>$(SolutionDir)bin\int\$(Configuration)-$(Platform)\$(ProjectName)\</IntDir>
-    <PublicIncludeDirectories>$(SolutionDir)build\_deps\webframework-src\api\cxx\include\;$(PublicIncludeDirectories)</PublicIncludeDirectories>
+    <PublicIncludeDirectories>$(ProjectDir)build\_deps\webframework-src\api\cxx\include\;$(PublicIncludeDirectories)</PublicIncludeDirectories>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
@@ -70,10 +70,9 @@
     </Link>
     <PreBuildEvent>
       <Command>call "$(VCInstallDir)Auxiliary\Build\vcvars64.bat"
-cd $(SolutionDir)
+cd $(ProjectDir)
 if not exist build mkdir build
-cd build &amp;&amp; cmake ..
-if not exist "$(OutDir)..\$(SolutionName)" mkdir "$(OutDir)..\$(SolutionName)"</Command>
+cd build &amp;&amp; cmake ..</Command>
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -94,10 +93,9 @@ if not exist "$(OutDir)..\$(SolutionName)" mkdir "$(OutDir)..\$(SolutionName)"</
     </Link>
     <PreBuildEvent>
       <Command>call "$(VCInstallDir)Auxiliary\Build\vcvars64.bat"
-cd $(SolutionDir)
+cd $(ProjectDir)
 if not exist build mkdir build
-cd build &amp;&amp; cmake ..
-if not exist "$(OutDir)..\$(SolutionName)" mkdir "$(OutDir)..\$(SolutionName)"</Command>
+cd build &amp;&amp; cmake ..</Command>
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
