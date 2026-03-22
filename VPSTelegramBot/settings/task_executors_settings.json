@@ -1,0 +1,9 @@
+[
+  {
+    "sourcePath": "current",
+    "api": "cxx",
+    "classNames": [
+      "NetworkSpeedTest"
+    ]
+  }
+]

@@ -1,0 +1,32 @@
+{
+  "$schema": "https://raw.githubusercontent.com/LazyPanda07/WebFramework/refs/heads/main/schemas/web_framework_config_schema.json",
+  "WebServer": {
+    "ip": "0.0.0.0",
+    "port": 8080
+  },
+  "WebFramework": {
+    "assetsPath": "assets",
+    "templatesPath": "templates",
+    "webServerType": "multiThreaded",
+    "loadSources": [
+      "current"
+    ],
+    "settingsPaths": [
+      "web.json"
+    ]
+  },
+  "TaskBroker": {
+    "consumer": "internal",
+    "taskBrokers": [
+      "internal"
+    ],
+    "taskExecutorsSettings": [
+      "task_executors_settings.json"
+    ]
+  },
+  "Logging": {
+    "dateFormat": "DMY",
+    "usingLogging": true,
+    "logFileSize": 10485760
+  }
+}

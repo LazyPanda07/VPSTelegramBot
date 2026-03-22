@@ -1,0 +1,7 @@
+<Solution>
+  <Configurations>
+    <Platform Name="x64" />
+  </Configurations>
+  <Project Path="VPSTelegramBot/VPSTelegramBot.vcxproj" Id="6d010671-66bf-4203-a3d9-a764ef51a074" />
+  <Project Path="FetchWebFramework/FetchWebFramework.vcxproj" Id="bade7c8e-8d20-4639-8cbd-c628404c1f60" />
+</Solution>
