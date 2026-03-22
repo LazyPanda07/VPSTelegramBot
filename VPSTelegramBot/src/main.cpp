@@ -17,5 +17,5 @@ catch (const std::exception& e)
 {
 	std::cerr << e.what() << std::endl;
 
-	exit(-1);
+	return 1;
 }

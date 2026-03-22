@@ -1,6 +1,6 @@
 {
   "$schema": "https://raw.githubusercontent.com/LazyPanda07/WebFramework/refs/heads/main/schemas/executors_schema.json",
-  "HelloExecutor": {
+  "AddNetworkSpeedTest": {
     "api": "cxx",
     "loadType": "initialization",
     "route": ""

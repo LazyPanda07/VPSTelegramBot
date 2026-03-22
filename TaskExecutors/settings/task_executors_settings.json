@@ -1,0 +1,9 @@
+[
+  {
+    "classNames": [
+      "NetworkSpeedTest"
+    ],
+    "sourcePath": "TaskExecutors",
+    "api": "cxx"
+  }
+]

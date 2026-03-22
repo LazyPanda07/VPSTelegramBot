@@ -15,20 +15,16 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\main.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Executors\AddNetworkSpeedTest.cpp">
+    <ClCompile Include="src\NetworkSpeedTest.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="config.json" />
-    <None Include="settings\web.json" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="include\Executors\AddNetworkSpeedTest.h">
+    <ClInclude Include="include\NetworkSpeedTest.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="settings\task_executors_settings.json" />
   </ItemGroup>
 </Project>

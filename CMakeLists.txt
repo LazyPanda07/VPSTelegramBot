@@ -4,4 +4,5 @@ project(VPSTelegramBotProject)
 
 add_subdirectory(FetchWebFramework)
 
+add_subdirectory(TaskExecutors)
 add_subdirectory(VPSTelegramBot)

@@ -1,13 +1,12 @@
 cmake_minimum_required(VERSION 3.27.0)
 
-project(VPSTelegramBot)
+project(TaskExecutors)
 
 find_package(WebFramework REQUIRED)
 
-add_executable(
-	${PROJECT_NAME}
-	src/main.cpp
-	src/Executors/AddNetworkSpeedTest.cpp
+add_library(
+	${PROJECT_NAME} SHARED
+	src/NetworkSpeedTest.cpp
 )
 
 target_include_directories(
@@ -20,13 +19,5 @@ target_link_libraries(
 	WebFramework::CXX_API
 )
 
-if (UNIX)
-	target_link_options(
-		${PROJECT_NAME} PRIVATE
-		-rdynamic
-	)
-endif()
-
 install(TARGETS ${PROJECT_NAME} DESTINATION .)
 install(DIRECTORY settings/ DESTINATION .)
-install(FILES config.json DESTINATION .)

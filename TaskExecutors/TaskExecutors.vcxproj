@@ -13,19 +13,19 @@
   <PropertyGroup Label="Globals">
     <VCProjectVersion>18.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{6d010671-66bf-4203-a3d9-a764ef51a074}</ProjectGuid>
-    <RootNamespace>VPSTelegramBot</RootNamespace>
+    <ProjectGuid>{98b8db0e-78c5-4f2f-a104-e519d7fe55a2}</ProjectGuid>
+    <RootNamespace>TaskExecutors</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v145</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>v145</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
@@ -66,9 +66,8 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
     <PostBuildEvent>
-      <Command>xcopy /y $(ProjectDir)config.json $(OutDir)
-xcopy /y $(ProjectDir)settings\*.json $(OutDir)
-xcopy /y $(SolutionDir)FetchWebFramework\build\_deps\webframework-src\dll\*.dll $(OutDir)</Command>
+      <Command>xcopy /y $(ProjectDir)settings\*.json $(OutDir)
+xcopy /y $(OutDir) $(OutDir)..\VPSTelegramBot</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -88,36 +87,25 @@ xcopy /y $(SolutionDir)FetchWebFramework\build\_deps\webframework-src\dll\*.dll 
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
     <PostBuildEvent>
-      <Command>xcopy /y $(ProjectDir)config.json $(OutDir)
-xcopy /y $(ProjectDir)settings\*.json $(OutDir)
-xcopy /y $(SolutionDir)FetchWebFramework\build\_deps\webframework-src\dll\*.dll $(OutDir)</Command>
+      <Command>xcopy /y $(ProjectDir)settings\*.json $(OutDir)
+xcopy /y $(OutDir) $(OutDir)..\VPSTelegramBot</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="src\Executors\AddNetworkSpeedTest.cpp" />
-    <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="src\NetworkSpeedTest.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\FetchWebFramework\FetchWebFramework.vcxproj">
       <Project>{bade7c8e-8d20-4639-8cbd-c628404c1f60}</Project>
     </ProjectReference>
-    <ProjectReference Include="..\TaskExecutors\TaskExecutors.vcxproj">
-      <Project>{98b8db0e-78c5-4f2f-a104-e519d7fe55a2}</Project>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="config.json" />
-    <None Include="settings\web.json" />
+    <ClInclude Include="include\NetworkSpeedTest.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="include\Executors\AddNetworkSpeedTest.h" />
+    <None Include="settings\task_executors_settings.json" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
-  <ProjectExtensions>
-    <VisualStudio>
-      <UserProperties />
-    </VisualStudio>
-  </ProjectExtensions>
 </Project>
