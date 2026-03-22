@@ -1,0 +1,52 @@
+name: "Build VPSTelegramBot"
+
+
+on:
+  workflow_call:
+    inputs:
+      os:
+        description: "runs-on OS"
+        required: true
+        type: string
+      image:
+        description: "Docker image"
+        required: false
+        type: string
+      upload-artifact-name:
+        description: "Upload artifact name"
+        required: false
+        type: string
+  
+
+jobs:
+  build:  
+    runs-on: ${{ inputs.os }}
+    container:
+      image: ${{ inputs.image }}
+  
+    steps:
+    - uses: actions/checkout@v6
+      with:
+        submodules: recursive
+
+    - name: Get current branch
+      uses: LazyPanda07/extract-current-branch@master
+
+    - name: Enable CL
+      if: ${{ inputs.os == 'windows-latest' }}
+      uses: ilammy/msvc-dev-cmd@v1.13.0
+
+    - name: Build
+      run: |
+        mkdir build
+        cd build
+        cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=install-dir -G "Ninja" ..
+        cmake --build . -j
+        cmake --install .
+
+    - name: Upload artifact
+      if: ${{ inputs.upload-artifact-name != '' }}
+      uses: actions/upload-artifact@v6
+      with:
+        name: ${{ inputs.upload-artifact-name }}
+        path: build/install-dir

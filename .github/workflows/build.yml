@@ -1,0 +1,17 @@
+name: "Build"
+
+
+on:
+  push:
+    branches:
+      - main
+      - dev
+
+
+jobs:
+  linux-build:
+    uses: ./.github/workflows/reusable_build.yml
+    with:
+      os: ubuntu-latest
+      image: ghcr.io/lazypanda07/ubuntu_cxx20:24.04
+      upload-artifact-name: Linux
