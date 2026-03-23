@@ -22,6 +22,15 @@ public:
 
 namespace executor
 {
+	void AddNetworkSpeedTest::doGet(framework::HttpRequest& request, framework::HttpResponse& response)
+	{
+		framework::JsonBuilder result;
+
+		result["message"] = "Hello, World!";
+
+		response.setBody(result);
+	}
+
 	void AddNetworkSpeedTest::doPost(framework::HttpRequest& request, framework::HttpResponse& response)
 	{
 		const framework::JsonParser& json = request.getJson();
