@@ -25,4 +25,4 @@ RUN apt upgrade -y
 COPY --from=builder /opt/app ./
 
 EXPOSE 24500 4923
-ENTRYPOINT ["./VPSTelegramBot"]
+CMD LD_LIBRARY_PATH=$(pwd) ./VPSTelegramBot
