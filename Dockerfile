@@ -11,7 +11,7 @@ RUN mkdir build
 
 WORKDIR /opt/VPSTelegramBot/build
 
-RUN cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=/opt/app -G "Ninja" .. 
+RUN cmake -DCMAKE_BUILD_TYPE=RelWithDebInfo -DCMAKE_INSTALL_PREFIX=/opt/app -G "Ninja" .. 
 RUN cmake --build . -j
 RUN cmake --install .
 
