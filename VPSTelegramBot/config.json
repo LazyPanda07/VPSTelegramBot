@@ -17,7 +17,7 @@
     "HTTPS": {
       "pathToCertificate": "cert",
       "pathToKey": "key",
-      "useHTTPS": false
+      "useHTTPS": true
     }
   },
   "TaskBroker": {
