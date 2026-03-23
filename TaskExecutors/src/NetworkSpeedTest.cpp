@@ -6,6 +6,7 @@
 
 #include <format>
 #include <filesystem>
+#include <iostream>
 
 #include <IOSocketStream.h>
 #include <HttpBuilder.h>
@@ -25,11 +26,18 @@ namespace task_executor
 		std::string resultFile = this->generateResultFile();
 		int64_t chatId;
 		std::string token;
+		std::ofstream output("log.log");
 
 		data.tryGet<int64_t>("chatId", chatId);
 		data.tryGet<std::string>("token", token);
 
+		std::cout << __LINE__ << std::endl;
+
+		output << __LINE__ << std::endl;
+
 		int errorCode = std::system(std::format("speedtest --simple > {}", resultFile).data());
+
+		output << __LINE__ << std::endl;
 
 		if (!errorCode)
 		{
