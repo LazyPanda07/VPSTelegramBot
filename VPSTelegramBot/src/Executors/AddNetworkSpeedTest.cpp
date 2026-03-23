@@ -1,5 +1,7 @@
 #include "Executors/AddNetworkSpeedTest.h"
 
+#include "Token.h"
+
 class UserSerializer : public framework::task_broker::TaskSerializer<>
 {
 private:
@@ -7,7 +9,7 @@ private:
 
 private:
 	framework::JsonObject serializeArguments() const override;
-
+	
 	std::string_view getTaskExecutorName() const override;
 
 public:
@@ -39,6 +41,7 @@ framework::JsonObject UserSerializer::serializeArguments() const
 	framework::JsonObject result;
 
 	result["chatId"] = chatId;
+	result["token"] = token;
 
 	return result;
 }

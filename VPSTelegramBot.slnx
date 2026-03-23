@@ -2,6 +2,7 @@
   <Configurations>
     <Platform Name="x64" />
   </Configurations>
+  <Project Path="FetchNetworks/FetchNetworks.vcxproj" Id="814327bf-e198-45a4-8213-9de92bc749f5" />
   <Project Path="FetchWebFramework/FetchWebFramework.vcxproj" Id="bade7c8e-8d20-4639-8cbd-c628404c1f60" />
   <Project Path="TaskExecutors/TaskExecutors.vcxproj" Id="98b8db0e-78c5-4f2f-a104-e519d7fe55a2" />
   <Project Path="VPSTelegramBot/VPSTelegramBot.vcxproj" Id="6d010671-66bf-4203-a3d9-a764ef51a074" />

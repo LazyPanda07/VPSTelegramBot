@@ -21,6 +21,8 @@ FetchContent_Declare(
 
 FetchContent_MakeAvailable(WebFramework)
 
+set(WEB_FRAMEWORK_SDK ${webframework_SOURCE_DIR} PARENT_SCOPE)
+
 list(APPEND CMAKE_PREFIX_PATH ${webframework_SOURCE_DIR})
 
 set(CMAKE_PREFIX_PATH ${CMAKE_PREFIX_PATH} PARENT_SCOPE)

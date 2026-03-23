@@ -2,8 +2,19 @@
 
 #include <import.hpp>
 
+#include "Token.h"
+
 int main(int argc, char** argv) try
 {
+	if (argc != 2)
+	{
+		std::cerr << "No token provided" << std::endl;
+
+		return 1;
+	}
+
+	token = argv[1];
+
 	framework::utility::initializeWebFramework();
 
 	framework::utility::Config config("config.json");
@@ -17,5 +28,5 @@ catch (const std::exception& e)
 {
 	std::cerr << e.what() << std::endl;
 
-	return 1;
+	return 2;
 }

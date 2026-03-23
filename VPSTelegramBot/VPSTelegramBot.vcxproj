@@ -64,6 +64,8 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
       <Command>xcopy /y $(ProjectDir)config.json $(OutDir)
@@ -86,6 +88,8 @@ xcopy /y $(SolutionDir)FetchWebFramework\build\_deps\webframework-src\dll\*.dll 
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
       <Command>xcopy /y $(ProjectDir)config.json $(OutDir)
@@ -111,6 +115,7 @@ xcopy /y $(SolutionDir)FetchWebFramework\build\_deps\webframework-src\dll\*.dll 
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\Executors\AddNetworkSpeedTest.h" />
+    <ClInclude Include="include\Token.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
