@@ -22,8 +22,8 @@ FetchContent_Declare(
 FetchContent_MakeAvailable(BaseTCPServer)
 
 if (UNIX)
-    set(BASE_TCP_SERVER_INCLUDE_DIRECTORIES ${basetcpserver_SOURCE_DIR}/Release_Linux/include)
-    set(BASE_TCP_SERVER_LINK_DIRECTORIES ${basetcpserver_SOURCE_DIR}/Release_Linux/lib)
+    set(BASE_TCP_SERVER_INCLUDE_DIRECTORIES ${basetcpserver_SOURCE_DIR}/include)
+    set(BASE_TCP_SERVER_LINK_DIRECTORIES ${basetcpserver_SOURCE_DIR}/lib)
 else()
     set(BASE_TCP_SERVER_INCLUDE_DIRECTORIES ${basetcpserver_SOURCE_DIR}/${CMAKE_BUILD_TYPE}_Windows/include)
     set(BASE_TCP_SERVER_LINK_DIRECTORIES ${basetcpserver_SOURCE_DIR}/${CMAKE_BUILD_TYPE}_Windows/lib)
