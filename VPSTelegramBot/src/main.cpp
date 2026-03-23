@@ -15,6 +15,13 @@ int main(int argc, char** argv) try
 
 	token = argv[1];
 
+	if (token == "default")
+	{
+		std::cerr << "Provided default token" << std::endl;
+
+		return 2;
+	}
+
 	framework::utility::initializeWebFramework();
 
 	framework::utility::Config config("config.json");
@@ -28,5 +35,5 @@ catch (const std::exception& e)
 {
 	std::cerr << e.what() << std::endl;
 
-	return 2;
+	return 3;
 }

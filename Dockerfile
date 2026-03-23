@@ -17,7 +17,8 @@ RUN cmake --install .
 
 FROM ubuntu:24.04 AS deploy
 
-ENV TOKEN
+ENV TOKEN=default
+ENV LD_LIBRARY_PATH=$(pwd)
 
 RUN apt update
 RUN apt upgrade -y
@@ -25,4 +26,4 @@ RUN apt upgrade -y
 COPY --from=builder /opt/app ./
 
 EXPOSE 24500
-CMD LD_LIBRARY_PATH=$(pwd) ./VPSTelegramBot ${TOKEN}
+ENTRYPOINT ["./VPSTelegramBot", "${TOKEN}"]
