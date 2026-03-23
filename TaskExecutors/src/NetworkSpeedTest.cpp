@@ -35,14 +35,23 @@ namespace task_executor
 		{
 			streams::IOSocketStream stream = streams::IOSocketStream::createStream<web::HttpsNetwork>("api.telegram.org");
 			json::JsonBuilder result(CP_UTF8);
-
+			std::string response;
+			
 			result["chat_id"] = chatId;
 			result["text"] = (std::ostringstream() << std::ifstream(resultFile).rdbuf()).str();
 
-			stream << web::HttpBuilder()
+			std::string httpBody = web::HttpBuilder()
 				.postRequest()
 				.parameters(std::format("bot{}/sendMessage", token))
 				.build(result);
+
+			std::ofstream("request.txt") << httpBody;
+
+			stream << httpBody;
+
+			stream >> response;
+
+			std::ofstream("response.txt") << response;
 		}
 		else
 		{
