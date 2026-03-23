@@ -18,6 +18,7 @@ RUN cmake --install .
 FROM ubuntu:24.04 AS deploy
 
 RUN apt update
+RUN apt install -y speedtest-cli
 RUN apt upgrade -y
 
 COPY --from=builder /opt/app ./

@@ -44,6 +44,10 @@ namespace task_executor
 				.parameters(std::format("bot{}/sendMessage", token))
 				.build(result);
 		}
+		else
+		{
+			std::ofstream(std::format("{}.log", resultFile)) << "Error code: " << errorCode << std::endl;
+		}
 
 		std::filesystem::remove(resultFile);
 	}
