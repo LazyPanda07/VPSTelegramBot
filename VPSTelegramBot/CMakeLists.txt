@@ -13,11 +13,18 @@ add_executable(
 target_include_directories(
 	${PROJECT_NAME} PRIVATE
 	include
+	${BASE_TCP_SERVER_INCLUDE_DIRECTORIES}
 )
 
 target_link_libraries(
 	${PROJECT_NAME} PRIVATE
 	WebFramework::CXX_API
+	BaseTCPServer
+)
+
+target_link_directories(
+	${PROJECT_NAME} PRIVATE
+	${BASE_TCP_SERVER_LINK_DIRECTORIES}
 )
 
 if (UNIX)

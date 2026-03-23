@@ -13,7 +13,12 @@
     ],
     "settingsPaths": [
       "web.json"
-    ]
+    ],
+    "HTTPS": {
+      "pathToCertificate": "cert",
+      "pathToKey": "key",
+      "useHTTPS": true
+    }
   },
   "TaskBroker": {
     "consumer": "internal",
