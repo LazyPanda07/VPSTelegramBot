@@ -17,8 +17,6 @@ RUN cmake --install .
 
 FROM ubuntu:24.04 AS deploy
 
-ENV LD_LIBRARY_PATH=$(pwd)
-
 RUN apt update
 RUN apt upgrade -y
 
