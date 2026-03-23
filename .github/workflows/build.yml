@@ -15,3 +15,15 @@ jobs:
       os: ubuntu-latest
       image: ghcr.io/lazypanda07/ubuntu_cxx20:24.04
       upload-artifact-name: Linux
+
+
+  docker-build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v6
+      with:
+        submodules: recursive
+
+    - name: Build Docker image
+      run: sudo docker build . -t ghcr.io/lazypanda07/vps_telegram_bot
