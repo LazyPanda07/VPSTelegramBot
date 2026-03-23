@@ -13,19 +13,19 @@
   <PropertyGroup Label="Globals">
     <VCProjectVersion>18.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{6d010671-66bf-4203-a3d9-a764ef51a074}</ProjectGuid>
-    <RootNamespace>VPSTelegramBot</RootNamespace>
+    <ProjectGuid>{bde91724-0ba5-4eee-9bc5-4eed82ec537b}</ProjectGuid>
+    <RootNamespace>FetchBaseTCPServer</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
+    <ConfigurationType>Utility</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v145</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
+    <ConfigurationType>Utility</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>v145</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
@@ -46,10 +46,12 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <OutDir>$(SolutionDir)bin\$(Configuration)-$(Platform)\$(ProjectName)\</OutDir>
     <IntDir>$(SolutionDir)bin\int\$(Configuration)-$(Platform)\$(ProjectName)\</IntDir>
+    <PublicIncludeDirectories>$(ProjectDir)build\_deps\basetcpserver-src\$(Configuration)_Windows\include\;$(PublicIncludeDirectories)</PublicIncludeDirectories>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <OutDir>$(SolutionDir)bin\$(Configuration)-$(Platform)\$(ProjectName)\</OutDir>
     <IntDir>$(SolutionDir)bin\int\$(Configuration)-$(Platform)\$(ProjectName)\</IntDir>
+    <PublicIncludeDirectories>$(ProjectDir)build\_deps\basetcpserver-src\$(Configuration)_Windows\include\;$(PublicIncludeDirectories)</PublicIncludeDirectories>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
@@ -64,14 +66,13 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(SolutionDir)FetchBaseTCPServer\build\_deps\basetcpserver-src\$(Configuration)_Windows\lib\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>BaseTCPServer.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
-    <PostBuildEvent>
-      <Command>xcopy /y $(ProjectDir)config.json $(OutDir)
-xcopy /y $(ProjectDir)settings\*.json $(OutDir)
-xcopy /y $(SolutionDir)FetchWebFramework\build\_deps\webframework-src\dll\*.dll $(OutDir)</Command>
-    </PostBuildEvent>
+    <PreBuildEvent>
+      <Command>call "$(VCInstallDir)Auxiliary\Build\vcvars64.bat"
+cd $(ProjectDir)
+if not exist build mkdir build
+cd build &amp;&amp; cmake ..</Command>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
@@ -88,44 +89,15 @@ xcopy /y $(SolutionDir)FetchWebFramework\build\_deps\webframework-src\dll\*.dll 
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(SolutionDir)FetchBaseTCPServer\build\_deps\basetcpserver-src\$(Configuration)_Windows\lib\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>BaseTCPServer.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
-    <PostBuildEvent>
-      <Command>xcopy /y $(ProjectDir)config.json $(OutDir)
-xcopy /y $(ProjectDir)settings\*.json $(OutDir)
-xcopy /y $(SolutionDir)FetchWebFramework\build\_deps\webframework-src\dll\*.dll $(OutDir)</Command>
-    </PostBuildEvent>
+    <PreBuildEvent>
+      <Command>call "$(VCInstallDir)Auxiliary\Build\vcvars64.bat"
+cd $(ProjectDir)
+if not exist build mkdir build
+cd build &amp;&amp; cmake ..</Command>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
-  <ItemGroup>
-    <ClCompile Include="src\Executors\AddNetworkSpeedTest.cpp" />
-    <ClCompile Include="src\main.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\FetchBaseTCPServer\FetchBaseTCPServer.vcxproj">
-      <Project>{bde91724-0ba5-4eee-9bc5-4eed82ec537b}</Project>
-    </ProjectReference>
-    <ProjectReference Include="..\FetchWebFramework\FetchWebFramework.vcxproj">
-      <Project>{bade7c8e-8d20-4639-8cbd-c628404c1f60}</Project>
-    </ProjectReference>
-    <ProjectReference Include="..\TaskExecutors\TaskExecutors.vcxproj">
-      <Project>{98b8db0e-78c5-4f2f-a104-e519d7fe55a2}</Project>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="config.json" />
-    <None Include="settings\web.json" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="include\Executors\AddNetworkSpeedTest.h" />
-    <ClInclude Include="include\Token.h" />
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
-  <ProjectExtensions>
-    <VisualStudio>
-      <UserProperties />
-    </VisualStudio>
-  </ProjectExtensions>
 </Project>
