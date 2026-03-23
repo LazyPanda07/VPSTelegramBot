@@ -27,3 +27,11 @@ jobs:
 
     - name: Build Docker image
       run: sudo docker build . -t ghcr.io/lazypanda07/vps_telegram_bot
+
+    - name: Export Docker image
+      run: docker save -o vps_telegram_bot.tar ghcr.io/lazypanda07/vps_telegram_bot
+
+    - name: Upload Docker image
+      uses: actions/upload-artifact@v6
+      with:
+        path: vps_telegram_bot.tar
