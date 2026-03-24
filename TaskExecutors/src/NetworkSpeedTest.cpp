@@ -18,49 +18,36 @@ namespace task_executor
 
 	void NetworkSpeedTest::operator ()(const framework::JsonObject& data)
 	{
-		std::string resultFile = this->generateResultFile();
 		int64_t chatId;
 		std::string token;
+		std::string response;
+		streams::IOSocketStream stream = streams::IOSocketStream::createStream<web::HttpsNetwork>("api.telegram.org");
+		json::JsonBuilder result(CP_UTF8);
+		std::string resultFile = this->generateResultFile();
 		
 		data.tryGet<int64_t>("chatId", chatId);
 		data.tryGet<std::string>("token", token);
 
 		int errorCode = std::system(std::format("speedtest --simple > {}", resultFile).data());
+		std::string text = (std::ostringstream() << std::ifstream(resultFile).rdbuf()).str();
 
-		if (!errorCode)
+		if (errorCode)
 		{
-			streams::IOSocketStream stream = streams::IOSocketStream::createStream<web::HttpsNetwork>("api.telegram.org");
-			json::JsonBuilder result(CP_UTF8);
-			std::string response;
-			std::string speedtestData;
-			
-			{
-				std::ifstream stream(resultFile);
-				std::string temp;
-
-				while (std::getline(stream, temp))
-				{
-					speedtestData += temp + R"(\n)";
-				}
-			}
-
-			result["chat_id"] = chatId;
-			result["text"] = speedtestData;
-
-			std::string request = web::HttpBuilder()
-				.postRequest()
-				.headers("Host", "api.telegram.org")
-				.parameters(std::format("bot{}/sendMessage", token))
-				.build(result);
-
-			std::ofstream("request.txt") << request;
-
-			stream << request;
-
-			stream >> response;
-
-			std::ofstream("response.txt") << response;
+			text += std::format("\nError code: {}", errorCode);
 		}
+
+		result["chat_id"] = chatId;
+		result["text"] = text;
+
+		std::string request = web::HttpBuilder()
+			.postRequest()
+			.headers("Host", "api.telegram.org")
+			.parameters(std::format("bot{}/sendMessage", token))
+			.build(result);
+
+		stream << request;
+
+		stream >> response;
 
 		std::filesystem::remove(resultFile);
 	}

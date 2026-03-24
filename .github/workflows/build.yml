@@ -8,6 +8,10 @@ on:
       - dev
 
 
+permissions:
+  packages: write
+
+
 jobs:
   linux-build:
     uses: ./.github/workflows/reusable_build.yml
@@ -17,7 +21,7 @@ jobs:
       upload-artifact-name: Linux
 
 
-  docker-build:
+  docker-publish:
     runs-on: ubuntu-latest
 
     steps:
@@ -27,11 +31,8 @@ jobs:
 
     - name: Build Docker image
       run: sudo docker build . -t ghcr.io/lazypanda07/vps_telegram_bot
-
-    - name: Export Docker image
-      run: docker save -o vps_telegram_bot.tar ghcr.io/lazypanda07/vps_telegram_bot
-
-    - name: Upload Docker image
-      uses: actions/upload-artifact@v6
-      with:
-        path: vps_telegram_bot.tar
+      
+    - name: Publish Docker image
+      run: |
+        echo ${{ secrets.GITHUB_TOKEN }} | sudo docker login ghcr.io -u LazyPanda07 --password-stdin
+        sudo docker push ghcr.io/lazypanda07/vps_telegram_bot
