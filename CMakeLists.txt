@@ -7,6 +7,11 @@ set(BASE_TCP_SERVER_LINK_DIRECTORIES "" CACHE INTERNAL "")
 
 project(VPSTelegramBotProject)
 
+if (WIN32)
+	add_definitions(-DWIN32_LEAN_AND_MEAN)
+	add_definitions(-D_CRT_SECURE_NO_WARNINGS)
+endif()
+
 add_subdirectory(FetchWebFramework)
 add_subdirectory(FetchNetworks)
 add_subdirectory(FetchBaseTCPServer)

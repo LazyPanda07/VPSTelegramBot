@@ -1,7 +1,3 @@
-#ifdef _WIN32
-#define WIN32_LEAN_AND_MEAN
-#endif
-
 #include "NetworkSpeedTest.h"
 
 #include <format>
@@ -36,26 +32,34 @@ namespace task_executor
 			streams::IOSocketStream stream = streams::IOSocketStream::createStream<web::HttpsNetwork>("api.telegram.org");
 			json::JsonBuilder result(CP_UTF8);
 			std::string response;
+			std::string speedtestData;
 			
-			result["chat_id"] = chatId;
-			result["text"] = (std::ostringstream() << std::ifstream(resultFile).rdbuf()).str();
+			{
+				std::ifstream stream(resultFile);
+				std::string temp;
 
-			std::string httpBody = web::HttpBuilder()
+				while (std::getline(stream, temp))
+				{
+					speedtestData += temp + R"(\n)";
+				}
+			}
+
+			result["chat_id"] = chatId;
+			result["text"] = speedtestData;
+
+			std::string request = web::HttpBuilder()
 				.postRequest()
+				.headers("Host", "api.telegram.org")
 				.parameters(std::format("bot{}/sendMessage", token))
 				.build(result);
 
-			std::ofstream("request.txt") << httpBody;
+			std::ofstream("request.txt") << request;
 
-			stream << httpBody;
+			stream << request;
 
 			stream >> response;
 
 			std::ofstream("response.txt") << response;
-		}
-		else
-		{
-			std::ofstream(std::format("{}.log", resultFile)) << "Error code: " << errorCode << std::endl;
 		}
 
 		std::filesystem::remove(resultFile);
