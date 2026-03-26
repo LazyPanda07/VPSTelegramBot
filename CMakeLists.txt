@@ -15,3 +15,5 @@ add_subdirectory(FetchNetworks)
 
 add_subdirectory(TaskExecutors)
 add_subdirectory(VPSTelegramBot)
+
+install(FILES run.sh DESTINATION .)

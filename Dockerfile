@@ -21,7 +21,14 @@ RUN apt update
 RUN apt install -y speedtest-cli
 RUN apt upgrade -y
 
+RUN mkdir /certs
+RUN mkdir /opt/vps_telegram_bot
+
+WORKDIR /opt/vps_telegram_bot
+
 COPY --from=builder /opt/app ./
 
-EXPOSE 88 4923
-CMD LD_LIBRARY_PATH=$(pwd) ./VPSTelegramBot
+RUN chmod +x run.sh
+
+EXPOSE 88
+ENTRYPOINT ["./run.sh"]
