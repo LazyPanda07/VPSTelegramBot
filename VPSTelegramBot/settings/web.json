@@ -1,8 +1,13 @@
 {
   "$schema": "https://raw.githubusercontent.com/LazyPanda07/WebFramework/refs/heads/main/schemas/executors_schema.json",
   "AddNetworkSpeedTest": {
-    "api": "cxx",
     "loadType": "initialization",
-    "route": ""
+    "route": "",
+    "api": "cxx"
+  },
+  "UpdateCertificates": {
+    "loadType": "initialization",
+    "route": "ssl",
+    "api": "cxx"
   }
 }

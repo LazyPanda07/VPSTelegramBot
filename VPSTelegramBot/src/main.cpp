@@ -1,40 +1,8 @@
 #include <iostream>
 
 #include <import.hpp>
-#include <BaseTCPServer.h>
 
-#include "Token.h"
-
-class UpdateCertificatesServer : public web::BaseTCPServer
-{
-private:
-	framework::WebFramework& server;
-
-private:
-	void clientConnection(const std::string& ip, SOCKET clientSocket, sockaddr address, std::function<void()>& cleanup) override
-	{
-		constexpr size_t defaultSize = 64;
-
-		std::string updateCommand(defaultSize, '\0');
-
-		BaseTCPServer::receiveBytes(clientSocket, updateCommand.data(), static_cast<int>(updateCommand.size()));
-
-		if (updateCommand == "update certificates")
-		{
-			server.updateSslCertificates();
-		}
-	}
-
-public:
-	UpdateCertificatesServer(framework::WebFramework& server) :
-		BaseTCPServer("4923", "0.0.0.0", 0UL, false, 0UL, false),
-		server(server)
-	{
-
-	}
-
-	~UpdateCertificatesServer() = default;
-};
+#include "Globals.h"
 
 int main(int argc, char** argv) try
 {
@@ -68,6 +36,15 @@ int main(int argc, char** argv) try
 		throw std::runtime_error("Can't find KEY_PATH variable");
 	}
 
+	if (const char* temp = std::getenv("USER_AGENT_FILTER"))
+	{
+		userAgentFilter = temp;
+	}
+	else
+	{
+		throw std::runtime_error("Can't find USER_AGENT_FILTER variable");
+	}
+
 	framework::utility::initializeWebFramework();
 
 	framework::utility::Config config("config.json");
@@ -75,11 +52,9 @@ int main(int argc, char** argv) try
 	config.overrideConfiguration("pathToCertificate", certPath);
 	config.overrideConfiguration("pathToKey", keyPath);
 
-	framework::WebFramework server(config);
-	UpdateCertificatesServer updateCertificatesServer(server);
-
-	updateCertificatesServer.start();
-	server.start(true, []() { std::cout << "Server is running..." << std::endl; });
+	server = std::make_unique<framework::WebFramework>(config);
+	
+	server->start(true, []() { std::cout << "Server is running..." << std::endl; });
 
 	return 0;
 }

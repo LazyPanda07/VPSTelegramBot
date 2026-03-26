@@ -24,6 +24,9 @@
     <ClCompile Include="src\Serializers\ChatSerializer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\Executors\UpdateCertificates.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="config.json" />
@@ -37,6 +40,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="include\Serializers\ChatSerializer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Globals.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Executors\UpdateCertificates.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

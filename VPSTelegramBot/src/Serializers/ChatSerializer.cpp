@@ -1,6 +1,6 @@
 #include "Serializers/ChatSerializer.h"
 
-#include "Token.h"
+#include "Globals.h"
 
 namespace serializer
 {

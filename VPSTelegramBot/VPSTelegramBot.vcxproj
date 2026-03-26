@@ -64,8 +64,8 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(SolutionDir)FetchBaseTCPServer\build\_deps\basetcpserver-src\$(Configuration)_Windows\lib\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>BaseTCPServer.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
       <Command>xcopy /y $(ProjectDir)config.json $(OutDir)
@@ -88,8 +88,8 @@ xcopy /y $(SolutionDir)FetchWebFramework\build\_deps\webframework-src\dll\*.dll 
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(SolutionDir)FetchBaseTCPServer\build\_deps\basetcpserver-src\$(Configuration)_Windows\lib\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>BaseTCPServer.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
       <Command>xcopy /y $(ProjectDir)config.json $(OutDir)
@@ -99,13 +99,11 @@ xcopy /y $(SolutionDir)FetchWebFramework\build\_deps\webframework-src\dll\*.dll 
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="src\Executors\AddNetworkSpeedTest.cpp" />
+    <ClCompile Include="src\Executors\UpdateCertificates.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\Serializers\ChatSerializer.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\FetchBaseTCPServer\FetchBaseTCPServer.vcxproj">
-      <Project>{bde91724-0ba5-4eee-9bc5-4eed82ec537b}</Project>
-    </ProjectReference>
     <ProjectReference Include="..\FetchWebFramework\FetchWebFramework.vcxproj">
       <Project>{bade7c8e-8d20-4639-8cbd-c628404c1f60}</Project>
     </ProjectReference>
@@ -119,6 +117,8 @@ xcopy /y $(SolutionDir)FetchWebFramework\build\_deps\webframework-src\dll\*.dll 
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\Executors\AddNetworkSpeedTest.h" />
+    <ClInclude Include="include\Executors\UpdateCertificates.h" />
+    <ClInclude Include="include\Globals.h" />
     <ClInclude Include="include\Serializers\ChatSerializer.h" />
     <ClInclude Include="include\Token.h" />
   </ItemGroup>
