@@ -24,4 +24,6 @@ namespace executor
 
 		server->updateSslCertificates();
 	}
+
+	DEFINE_EXECUTOR(UpdateCertificates)
 }
