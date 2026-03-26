@@ -2,35 +2,10 @@
 
 #include <fstream>
 
-#include "Token.h"
-
-class UserSerializer : public framework::task_broker::TaskSerializer<>
-{
-private:
-	int64_t chatId;
-
-private:
-	framework::JsonObject serializeArguments() const override;
-	
-	std::string_view getTaskExecutorName() const override;
-
-public:
-	UserSerializer(int64_t chatId);
-
-	~UserSerializer() = default;
-};
+#include "Serializers/ChatSerializer.h"
 
 namespace executor
 {
-	void AddNetworkSpeedTest::doGet(framework::HttpRequest& request, framework::HttpResponse& response)
-	{
-		framework::JsonBuilder result;
-
-		result["message"] = "Hello, World!";
-
-		response.setBody(result);
-	}
-
 	void AddNetworkSpeedTest::doPost(framework::HttpRequest& request, framework::HttpResponse& response)
 	{
 		const framework::JsonParser& json = request.getJson();
@@ -44,7 +19,7 @@ namespace executor
 
 		if (message.tryGet<std::string>("text", messageText) && messageText == "/check_speed")
 		{
-			request.enqueueTask<framework::task_broker::Internal, UserSerializer>(chatId);
+			request.enqueueTask<framework::task_broker::Internal, serializer::ChatSerializer>(chatId);
 
 			result["text"] = "Start checking network speed...";
 		}
@@ -57,25 +32,4 @@ namespace executor
 	}
 
 	DEFINE_EXECUTOR(AddNetworkSpeedTest);
-}
-
-UserSerializer::UserSerializer(int64_t chatId) :
-	chatId(chatId)
-{
-
-}
-
-framework::JsonObject UserSerializer::serializeArguments() const
-{
-	framework::JsonObject result;
-
-	result["chatId"] = chatId;
-	result["token"] = token;
-
-	return result;
-}
-
-std::string_view UserSerializer::getTaskExecutorName() const
-{
-	return "NetworkSpeedTest";
 }

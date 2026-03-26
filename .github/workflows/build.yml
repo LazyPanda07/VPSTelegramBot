@@ -23,6 +23,7 @@ jobs:
 
   docker-publish:
     runs-on: ubuntu-latest
+    needs: linux-build
 
     steps:
     - uses: actions/checkout@v6

@@ -22,8 +22,8 @@ namespace task_executor
 		std::string token;
 		std::string response;
 		streams::IOSocketStream stream = streams::IOSocketStream::createStream<web::HttpsNetwork>("api.telegram.org");
-		json::JsonBuilder result(CP_UTF8);
 		std::string resultFile = this->generateResultFile();
+		json::JsonBuilder result(CP_UTF8);
 		
 		data.tryGet<int64_t>("chatId", chatId);
 		data.tryGet<std::string>("token", token);

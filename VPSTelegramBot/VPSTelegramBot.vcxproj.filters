@@ -21,6 +21,9 @@
     <ClCompile Include="src\Executors\AddNetworkSpeedTest.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\Serializers\ChatSerializer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="config.json" />
@@ -31,6 +34,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="include\Token.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Serializers\ChatSerializer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

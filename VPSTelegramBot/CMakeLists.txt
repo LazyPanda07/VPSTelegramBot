@@ -8,6 +8,7 @@ add_executable(
 	${PROJECT_NAME}
 	src/main.cpp
 	src/Executors/AddNetworkSpeedTest.cpp
+	src/Serializers/ChatSerializer.cpp
 )
 
 target_include_directories(
