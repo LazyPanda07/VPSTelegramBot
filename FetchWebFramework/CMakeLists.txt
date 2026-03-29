@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.27.0)
 
-set(WEB_FRAMEWORK_VERSION 3.3.5)
+set(WEB_FRAMEWORK_VERSION 3.3.6)
 set(WEB_FRAMEWORK_URL https://github.com/LazyPanda07/WebFramework/releases/download/v${WEB_FRAMEWORK_VERSION})
 set(FETCHCONTENT_QUIET OFF CACHE BOOL "")
 
