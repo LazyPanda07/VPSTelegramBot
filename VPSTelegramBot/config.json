@@ -31,7 +31,7 @@
   },
   "Logging": {
     "dateFormat": "DMY",
-    "usingLogging": true,
+    "usingLogging": false,
     "logFileSize": 10485760
   }
 }
