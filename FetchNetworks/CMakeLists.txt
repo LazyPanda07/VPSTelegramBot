@@ -22,8 +22,8 @@ FetchContent_Declare(
 FetchContent_MakeAvailable(Networks)
 
 if (UNIX)
-    set(NETWORKS_INCLUDE_DIRECTORIES ${networks_SOURCE_DIR}/Release_Linux/include)
-    set(NETWORKS_LINK_DIRECTORIES ${networks_SOURCE_DIR}/Release_Linux/lib)
+    set(NETWORKS_INCLUDE_DIRECTORIES ${networks_SOURCE_DIR}/include)
+    set(NETWORKS_LINK_DIRECTORIES ${networks_SOURCE_DIR}/lib)
 else()
     set(NETWORKS_INCLUDE_DIRECTORIES ${networks_SOURCE_DIR}/${CMAKE_BUILD_TYPE}_Windows/include)
     set(NETWORKS_LINK_DIRECTORIES ${networks_SOURCE_DIR}/${CMAKE_BUILD_TYPE}_Windows/lib)
