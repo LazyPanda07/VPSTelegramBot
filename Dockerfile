@@ -1,4 +1,4 @@
-FROM ubuntu:24.04 AS builder
+FROM ubuntu:26.04 AS builder
 
 RUN apt update
 RUN apt install -y cmake git unzip gcc g++ ninja-build
@@ -15,7 +15,7 @@ RUN cmake -DCMAKE_BUILD_TYPE=RelWithDebInfo -DCMAKE_INSTALL_PREFIX=/opt/app -G "
 RUN cmake --build . -j
 RUN cmake --install .
 
-FROM ubuntu:24.04 AS deploy
+FROM ubuntu:26.04 AS deploy
 
 RUN apt update
 RUN apt install -y speedtest-cli
