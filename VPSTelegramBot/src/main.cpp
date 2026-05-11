@@ -52,9 +52,9 @@ int main(int argc, char** argv) try
 	config.overrideConfiguration("pathToCertificate", certPath);
 	config.overrideConfiguration("pathToKey", keyPath);
 
-	server = std::make_unique<framework::WebFramework>(config);
+	framework::WebFramework server(config);
 	
-	server->start(true, []() { std::cout << "Server is running..." << std::endl; });
+	server.start(true, []() { std::cout << "Server is running..." << std::endl; });
 
 	return 0;
 }

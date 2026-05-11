@@ -1,6 +1,6 @@
-cmake_minimum_required(VERSION 3.27.0)
+cmake_minimum_required(VERSION 4.0.0)
 
-set(NETWORKS_VERSION 1.25.0)
+set(NETWORKS_VERSION 1.28.1)
 set(NETWORKS_URL https://github.com/LazyPanda07/Networks/releases/download/v${NETWORKS_VERSION})
 set(FETCHCONTENT_QUIET OFF CACHE BOOL "")
 

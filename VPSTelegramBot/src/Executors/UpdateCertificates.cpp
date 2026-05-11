@@ -22,7 +22,7 @@ namespace executor
 			file.write(data.data(), data.size());
 		}
 
-		server->updateSslCertificates();
+		request.getWebFrameworkInstance().updateSslCertificates();
 	}
 
 	DEFINE_EXECUTOR(UpdateCertificates)

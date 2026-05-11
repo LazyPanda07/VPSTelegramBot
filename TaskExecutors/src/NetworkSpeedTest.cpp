@@ -5,7 +5,7 @@
 
 #include <IOSocketStream.h>
 #include <HttpBuilder.h>
-#include <HttpsNetwork.h>
+#include <Http/HttpsNetwork.h>
 
 namespace task_executor
 {
@@ -16,12 +16,12 @@ namespace task_executor
 		return std::format("result_{}.txt", random());
 	}
 
-	void NetworkSpeedTest::operator ()(const framework::JsonObject& data)
+	void NetworkSpeedTest::execute(const framework::JsonObject& data, const framework::task_broker::TaskExecutor::TaskExecutorContext& context)
 	{
 		int64_t chatId;
 		std::string token;
 		std::string response;
-		streams::IOSocketStream stream = streams::IOSocketStream::createStream<web::HttpsNetwork>("api.telegram.org");
+		streams::IOSocketStream stream = streams::IOSocketStream::createStream<web::http::HttpsNetwork>("api.telegram.org");
 		std::string resultFile = this->generateResultFile();
 		json::JsonBuilder result(CP_UTF8);
 		

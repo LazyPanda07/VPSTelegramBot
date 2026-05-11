@@ -17,6 +17,6 @@ namespace task_executor
 		std::mutex generateMutex;
 
 	public:
-		void operator ()(const framework::JsonObject& data) override;
+		void execute(const framework::JsonObject& data, const framework::task_broker::TaskExecutor::TaskExecutorContext& context) override;
 	};
 }
