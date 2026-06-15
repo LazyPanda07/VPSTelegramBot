@@ -1,7 +1,7 @@
 FROM ubuntu:26.04 AS builder
 
 RUN apt update
-RUN apt install -y cmake git unzip gcc g++ ninja-build
+RUN apt install -y cmake git unzip gcc g++ ninja-build uuid-dev
 
 COPY ./ /opt/VPSTelegramBot
 
@@ -18,7 +18,7 @@ RUN cmake --install .
 FROM ubuntu:26.04 AS deploy
 
 RUN apt update
-RUN apt install -y speedtest-cli
+RUN apt install -y speedtest-cli libuuid1
 RUN apt upgrade -y
 
 RUN mkdir /certs
