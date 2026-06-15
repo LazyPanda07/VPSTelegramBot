@@ -13,6 +13,7 @@ target_include_directories(
 	${PROJECT_NAME} PRIVATE
 	include
 	${NETWORKS_INCLUDE_DIRECTORIES}
+	${UTILITY_LIBRARY_INCLUDE_DIRECTORIES}
 )
 
 target_link_libraries(
@@ -22,6 +23,7 @@ target_link_libraries(
 	JSON
 	HTTP
 	SocketStreams
+	UtilityLibrary
 	ssl
 	crypto
 )
@@ -29,6 +31,7 @@ target_link_libraries(
 target_link_directories(
 	${PROJECT_NAME} PRIVATE
 	${NETWORKS_LINK_DIRECTORIES}
+	${UTILITY_LIBRARY_LINK_DIRECTORIES}
 )
 
 if (WIN32)

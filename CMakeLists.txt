@@ -12,6 +12,7 @@ endif()
 
 add_subdirectory(FetchWebFramework)
 add_subdirectory(FetchNetworks)
+add_subdirectory(FetchUtilityLibrary)
 
 add_subdirectory(TaskExecutors)
 add_subdirectory(VPSTelegramBot)
