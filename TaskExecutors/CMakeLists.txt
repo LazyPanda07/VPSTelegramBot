@@ -34,7 +34,12 @@ target_link_directories(
 	${UTILITY_LIBRARY_LINK_DIRECTORIES}
 )
 
-if (WIN32)
+if (UNIX)
+	target_link_libraries(
+		${PROJECT_NAME} PRIVATE
+		uuid
+	)
+elseif (WIN32)
 	target_link_libraries(
 		${PROJECT_NAME} PRIVATE
 		crypt32
