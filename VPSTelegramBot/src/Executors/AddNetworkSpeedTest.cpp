@@ -1,7 +1,5 @@
 #include "Executors/AddNetworkSpeedTest.h"
 
-#include <fstream>
-
 #include "Serializers/ChatSerializer.h"
 
 namespace executor
@@ -9,6 +7,14 @@ namespace executor
 	void AddNetworkSpeedTest::doPost(framework::HttpRequest& request, framework::HttpResponse& response)
 	{
 		const framework::JsonParser& json = request.getJson();
+
+		if (!json.contains<framework::JsonObject>("message"))
+		{
+			response.setBody(std::format("Wrong input from Telegram: {}", request.getRawRequest()));
+
+			return;
+		}
+
 		framework::JsonObject message = json.get<framework::JsonObject>("message");
 		int64_t chatId = message["from"]["id"].get<int64_t>();
 		framework::JsonBuilder result;

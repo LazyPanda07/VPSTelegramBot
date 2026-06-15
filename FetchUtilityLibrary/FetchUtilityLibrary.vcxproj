@@ -13,19 +13,19 @@
   <PropertyGroup Label="Globals">
     <VCProjectVersion>18.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{98b8db0e-78c5-4f2f-a104-e519d7fe55a2}</ProjectGuid>
-    <RootNamespace>TaskExecutors</RootNamespace>
+    <ProjectGuid>{ACA3EC97-11B7-4162-8BE6-7E3280378DF0}</ProjectGuid>
+    <RootNamespace>FetchUtilityLibrary</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
-    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <ConfigurationType>Utility</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v145</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
-    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <ConfigurationType>Utility</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>v145</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
@@ -46,16 +46,18 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <OutDir>$(SolutionDir)bin\$(Configuration)-$(Platform)\$(ProjectName)\</OutDir>
     <IntDir>$(SolutionDir)bin\int\$(Configuration)-$(Platform)\$(ProjectName)\</IntDir>
+    <PublicIncludeDirectories>$(ProjectDir)build\_deps\utilitylibrary-src\$(Configuration)_Windows\include\;$(PublicIncludeDirectories)</PublicIncludeDirectories>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <OutDir>$(SolutionDir)bin\$(Configuration)-$(Platform)\$(ProjectName)\</OutDir>
     <IntDir>$(SolutionDir)bin\int\$(Configuration)-$(Platform)\$(ProjectName)\</IntDir>
+    <PublicIncludeDirectories>$(ProjectDir)build\_deps\utilitylibrary-src\$(Configuration)_Windows\include\;$(PublicIncludeDirectories)</PublicIncludeDirectories>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions);WIN32_LEAN_AND_MEAN</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
       <AdditionalIncludeDirectories>$(ProjectDir)include\</AdditionalIncludeDirectories>
@@ -64,13 +66,13 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(SolutionDir)FetchNetworks\build\_deps\networks-src\$(Configuration)_Windows\lib\;$(SolutionDir)FetchUtilityLibrary\build\_deps\utilitylibrary-src\$(Configuration)_Windows\lib\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>Networks.lib;JSON.lib;HTTP.lib;SocketStreams.lib;UtilityLibrary.lib;crypto.lib;ssl.lib;crypt32.lib;Rpcrt4.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
-    <PostBuildEvent>
-      <Command>xcopy /y $(ProjectDir)settings\*.json $(OutDir)
-xcopy /y $(OutDir) $(OutDir)..\VPSTelegramBot</Command>
-    </PostBuildEvent>
+    <PreBuildEvent>
+      <Command>call "$(VCInstallDir)Auxiliary\Build\vcvars64.bat"
+cd $(ProjectDir)
+if not exist build mkdir build
+cd build &amp;&amp; cmake ..</Command>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
@@ -78,7 +80,7 @@ xcopy /y $(OutDir) $(OutDir)..\VPSTelegramBot</Command>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions);WIN32_LEAN_AND_MEAN</PreprocessorDefinitions>
+      <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
       <AdditionalIncludeDirectories>$(ProjectDir)include\</AdditionalIncludeDirectories>
@@ -87,34 +89,14 @@ xcopy /y $(OutDir) $(OutDir)..\VPSTelegramBot</Command>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(SolutionDir)FetchNetworks\build\_deps\networks-src\$(Configuration)_Windows\lib\;$(SolutionDir)FetchUtilityLibrary\build\_deps\utilitylibrary-src\$(Configuration)_Windows\lib\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>Networks.lib;JSON.lib;HTTP.lib;SocketStreams.lib;UtilityLibrary.lib;crypto.lib;ssl.lib;crypt32.lib;Rpcrt4.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
-    <PostBuildEvent>
-      <Command>xcopy /y $(ProjectDir)settings\*.json $(OutDir)
-xcopy /y $(OutDir) $(OutDir)..\VPSTelegramBot</Command>
-    </PostBuildEvent>
+    <PreBuildEvent>
+      <Command>call "$(VCInstallDir)Auxiliary\Build\vcvars64.bat"
+cd $(ProjectDir)
+if not exist build mkdir build
+cd build &amp;&amp; cmake ..</Command>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
-  <ItemGroup>
-    <ClCompile Include="src\NetworkSpeedTest.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\FetchNetworks\FetchNetworks.vcxproj">
-      <Project>{814327bf-e198-45a4-8213-9de92bc749f5}</Project>
-    </ProjectReference>
-    <ProjectReference Include="..\FetchUtilityLibrary\FetchUtilityLibrary.vcxproj">
-      <Project>{aca3ec97-11b7-4162-8be6-7e3280378df0}</Project>
-    </ProjectReference>
-    <ProjectReference Include="..\FetchWebFramework\FetchWebFramework.vcxproj">
-      <Project>{bade7c8e-8d20-4639-8cbd-c628404c1f60}</Project>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="include\NetworkSpeedTest.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="settings\task_executors_settings.json" />
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

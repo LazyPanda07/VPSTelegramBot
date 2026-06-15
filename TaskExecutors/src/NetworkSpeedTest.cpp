@@ -6,24 +6,18 @@
 #include <IOSocketStream.h>
 #include <HttpBuilder.h>
 #include <Http/HttpsNetwork.h>
+#include <UUID.h>
 
 namespace task_executor
 {
-	std::string NetworkSpeedTest::generateResultFile()
-	{
-		std::lock_guard<std::mutex> lock(generateMutex);
-
-		return std::format("result_{}.txt", random());
-	}
-
 	void NetworkSpeedTest::execute(const framework::JsonObject& data, const framework::task_broker::TaskExecutor::TaskExecutorContext& context)
 	{
 		int64_t chatId;
 		std::string token;
 		std::string response;
 		streams::IOSocketStream stream = streams::IOSocketStream::createStream<web::http::HttpsNetwork>("api.telegram.org");
-		std::string resultFile = this->generateResultFile();
-		json::JsonBuilder result(CP_UTF8);
+		std::string resultFile = std::format("result_{}.txt", utility::uuid::generateUUID());
+		json::JsonBuilder result;
 		
 		data.tryGet<int64_t>("chatId", chatId);
 		data.tryGet<std::string>("token", token);
